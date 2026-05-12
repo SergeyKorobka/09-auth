@@ -3,9 +3,9 @@
 import { useQuery } from '@tanstack/react-query';
 import css from './NoteDetails.module.css';
 import { useParams } from 'next/navigation';
-import { fetchNoteById } from '@/lib/api';
 import Loader from '@/components/Loader/Loader';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
+import { fetchNoteById } from '@/lib/api/clientApi';
 
 type Params = {
   id: string;

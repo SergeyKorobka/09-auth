@@ -2,7 +2,7 @@
 
 import SearchBox from '@/components/SearchBox/SearchBox';
 import css from './Notes.module.css';
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes } from '@/lib/api/clientApi';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
