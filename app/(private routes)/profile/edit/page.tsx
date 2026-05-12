@@ -3,37 +3,30 @@
 import { useRouter } from 'next/navigation';
 import css from './EditProfile.module.css';
 import Image from 'next/image';
-import { getMe, updateMe } from '@/lib/api/clientApi';
-import { useEffect, useState } from 'react';
+import { updateMe } from '@/lib/api/clientApi';
+import { useState } from 'react';
 import type { User } from '@/types/user';
 import type { ApiError } from '@/app/api/api';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function EditProfile() {
   const router = useRouter();
-  const [user, setUser] = useState<User>({
-    avatar: '',
-    email: '',
-    username: '',
-  });
-  const [errorMsg, setErrorMsg] = useState('');
 
-  useEffect(() => {
-    getMe()
-      .then(setUser)
-      .catch(() => router.push('/sign-in'));
-  }, [router, setUser]);
+  const [errorMsg, setErrorMsg] = useState('');
+  const user = useAuthStore(state => state.user);
+  const setUser = useAuthStore(state => state.setUser);
 
   async function handleSave(formData: FormData) {
     const username = formData.get('username') as string;
 
     try {
       const res = await updateMe({ username });
-      router.push('/profile');
 
       if (res) {
+        setUser(res);
         router.push('/profile');
       } else {
-        setErrorMsg('Invalid email or password');
+        setErrorMsg('Invalid username');
       }
     } catch (error) {
       setErrorMsg(
