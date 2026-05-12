@@ -5,7 +5,6 @@ import css from './EditProfile.module.css';
 import Image from 'next/image';
 import { updateMe } from '@/lib/api/clientApi';
 import { useState } from 'react';
-import type { User } from '@/types/user';
 import type { ApiError } from '@/app/api/api';
 import { useAuthStore } from '@/lib/store/authStore';
 
